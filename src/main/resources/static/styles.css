@@ -1,0 +1,14 @@
+.video{
+    width: 70vw;
+}
+
+.centered{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+}
+
+.debug{
+    background-color: purple;
+}

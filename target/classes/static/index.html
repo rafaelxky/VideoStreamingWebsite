@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Video Streaming & Download</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    video { width: 640px; height: auto; margin: 10px 0; }
+    .video-block { margin-bottom: 40px; }
+  </style>
+</head>
+<body>
+  <h1>Video Streaming & Download Service</h1>
+  <div id="video-container"></div>
+
+  <script>
+    fetch("/videos")
+      .then(res => res.json())
+      .then(files => {
+        const container = document.getElementById("video-container");
+
+        files.forEach(file => {
+          const block = document.createElement("div");
+          block.className = "video-block";
+
+          const title = document.createElement("button");
+          title.onclick = function goToVideo(){
+            window.location.href = `/video.html?file=${encodeURIComponent(file)}`;
+          }
+          title.textContent = file;
+
+          block.appendChild(title);
+          block.appendChild(document.createElement("br"));
+
+          container.appendChild(block);
+        });
+      });
+  </script>
+</body>
+</html>
