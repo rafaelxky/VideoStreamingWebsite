@@ -8,8 +8,8 @@ import java.util.stream.IntStream;
 public class NetHandler {
 
     private static final int PORT = 8080;
-    private static final int TIMEOUT = 500;
-    private static final int THREADS = 20; 
+    private static final int TIMEOUT = 100;
+    private static final int THREADS = 35; 
 
     public List<String> getAvailableLanIps() {
         String subnet = getLocalSubnet();
@@ -33,7 +33,6 @@ public class NetHandler {
             CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
                 .get(10, TimeUnit.SECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            System.err.println("Scan interrupted or timed out: " + e.getMessage());
         } finally {
             executor.shutdownNow();
         }
@@ -52,7 +51,6 @@ public class NetHandler {
             conn.disconnect();
             return code == 200;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -63,7 +61,6 @@ public class NetHandler {
             byte[] ip = localHost.getAddress();
             return (ip[0] & 0xFF) + "." + (ip[1] & 0xFF) + "." + (ip[2] & 0xFF) + ".";
         } catch (UnknownHostException e) {
-            System.err.println("Failed to detect local subnet, using default 192.168.1.");
             return "192.168.1.";
         }
     }
