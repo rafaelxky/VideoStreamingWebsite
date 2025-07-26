@@ -1,1 +1,2 @@
-Hello this is a README file
+Compile with "mvn compile"  
+run with "mvn spring-boot:run"
