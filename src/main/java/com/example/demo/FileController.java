@@ -53,7 +53,7 @@ public class FileController {
     @GetMapping("/ips")
     public ResponseEntity<List<String>> getSubnetIps(){
         NetHandler nh = new NetHandler();
-        List<String> ips = nh.get_available_lan_ips();
+        List<String> ips = nh.getAvailableLanIps();
         return ResponseEntity.ok(ips);
     }
 
